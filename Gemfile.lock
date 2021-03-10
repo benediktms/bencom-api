@@ -96,6 +96,10 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.8.9)
       concurrent-ruby (~> 1.0)
+    interactor (3.1.2)
+    interactor-rails (2.2.1)
+      interactor (~> 3.0)
+      rails (>= 4.2)
     listen (3.4.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -231,6 +235,7 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   faker
+  interactor-rails
   listen (~> 3.3)
   pg (~> 1.1)
   pry-byebug
