@@ -35,14 +35,17 @@ group :development, :test do
   gem 'faker'
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
+  gem 'factory_bot_rails'
 end
 
 group :test do
   gem 'database_cleaner'
+  gem 'shoulda-matchers'
 end
 
 group :development do
   gem 'listen', '~> 3.3'
+  gem 'annotate'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
