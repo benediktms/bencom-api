@@ -2,17 +2,19 @@
 #
 # Table name: users
 #
-#  id         :bigint           not null, primary key
-#  email      :string
-#  first_name :string
-#  lastname   :string
-#  password   :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :bigint           not null, primary key
+#  email           :string
+#  first_name      :string
+#  lastname        :string
+#  password_digest :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 # Indexes
 #
 #  index_users_on_email  (email)
 #
 class User < ApplicationRecord
+  has_secure_password
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, presence: true, uniqueness: true
 end
