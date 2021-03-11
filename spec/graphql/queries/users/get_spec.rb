@@ -31,7 +31,7 @@ module Queries
       def query
         <<~GRAPHQL
           query($id: ID!) {
-            showUser(id: $id) {
+            getUser(id: $id) {
               email
               firstName
             }
