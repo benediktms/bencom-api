@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Users
-  class Show < BaseInteractor
+  class Get < BaseInteractor
     delegate :id, to: :context
 
     def call
