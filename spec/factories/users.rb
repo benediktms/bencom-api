@@ -14,7 +14,11 @@
 #
 #  index_users_on_email  (email)
 #
-class User < ApplicationRecord
-  has_secure_password
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, presence: true, uniqueness: true
+FactoryBot.define do
+  factory :user do
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
+    email { Faker::Internet.email }
+    password { Faker::Internet.password }
+  end
 end
