@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 module Users
-  RSpec.describe Show, type: :interactor do
+  RSpec.describe Get, type: :interactor do
     subject(:context) { described_class.call(id: id) }
 
     let(:user) { create(:user) }
