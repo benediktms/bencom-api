@@ -5,6 +5,7 @@ require:
 AllCops:
   Exclude:
     - db/**/*
+  NewCops: enable
 
 Layout/LineLength:
   Max: 100
