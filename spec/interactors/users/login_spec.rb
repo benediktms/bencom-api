@@ -27,6 +27,10 @@ module Users
         it 'returns the user' do
           expect(login.user).to be_a User
         end
+
+        it 'returns token' do
+          expect(login.token).not_to be_nil
+        end
       end
 
       context 'wrong password' do

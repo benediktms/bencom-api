@@ -21,6 +21,10 @@ module Users
         it 'returns success message' do
           expect(sign_up.message).to eq 'You have successfully signed up'
         end
+
+        it 'returns token' do
+          expect(sign_up.token).not_to be_nil
+        end
       end
 
       context 'when given invalid attributes' do
