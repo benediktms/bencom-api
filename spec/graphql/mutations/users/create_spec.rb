@@ -18,7 +18,7 @@ module Mutations
             end.to change(User, :count).by 1
           end
 
-          it 'returns the user and a success message' do
+          it 'returns the user token and a success message' do
             execute = post '/graphql', params: { query: query_string, variables: variables }
 
             parsed_json = JSON.parse(response.body)
@@ -29,7 +29,17 @@ module Mutations
               'email' => variables[:email]
             )
             expect(data['message']).not_to be_nil
+            expect(data['token']).not_to be_nil
           end
+
+          # it 'returns the user token, and success message' do
+          #   execute = post '/graphql', params: { query: query_string, variables: variables }
+
+          #   parsed_json = JSON.parse(response.body)
+          #   data = parsed_json['data']['createUser']
+
+          #   expect(data['token']).not_to be_nil
+          # end
         end
 
         context 'invalid params' do
@@ -42,6 +52,7 @@ module Mutations
             expect(data['errors']).to eq ['Email is invalid', "Email can't be blank"]
             expect(data['user']).to be_nil
             expect(data['message']).to be_nil
+            expect(data['token']).to be_nil
           end
         end
       end
@@ -53,6 +64,7 @@ module Mutations
             firstName: $firstName, lastName: $lastName, email: $email, password: $password
             }) {
               user { firstName lastName email },
+              token,
               message,
               errors
             }

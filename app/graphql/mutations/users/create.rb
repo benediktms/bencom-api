@@ -11,12 +11,14 @@ module Mutations
       field :user, Types::UserType, null: true
       field :message, String, null: true
       field :errors, [String], null: true
+      field :token, String, null: true
 
       def resolve(**args)
         result = ::Users::Create.call(attributes: args)
 
         {
           user: result.user,
+          token: result.token,
           message: result.message,
           errors: result.errors
         }

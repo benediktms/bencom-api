@@ -8,6 +8,7 @@ module Mutations
 
       field :user, Types::UserType, null: true
       field :message, String, null: true
+      field :token, String, null: true
 
       def resolve(email:, password:)
         return unless email && password
@@ -16,6 +17,7 @@ module Mutations
 
         {
           user: result.user,
+          token: result.token,
           message: result.message
         }
       end

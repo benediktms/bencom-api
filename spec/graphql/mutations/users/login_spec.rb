@@ -23,6 +23,7 @@ module Mutations
 
             expect(data['user']).not_to be_empty
             expect(data['message']).to eq 'Successfully logged in'
+            expect(data['token']).not_to be_nil
           end
         end
 
@@ -37,6 +38,7 @@ module Mutations
 
             expect(data['message']).to eq 'That seems like a wrong password'
             expect(data['user']).to be_nil
+            expect(data['token']).to be_nil
           end
         end
 
@@ -51,6 +53,7 @@ module Mutations
 
             expect(data['message']).to eq 'Could not find an account with that email, please sign up instead'
             expect(data['user']).to be_nil
+            expect(data['token']).to be_nil
           end
         end
       end
@@ -60,6 +63,7 @@ module Mutations
           mutation($email: String!, $password: String!) {
             loginUser(input: { email: $email, password: $password }) {
               user { email },
+              token,
               message
             }
           }
