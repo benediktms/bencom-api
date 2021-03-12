@@ -23,4 +23,21 @@ RSpec.describe User, type: :model do
   it { should allow_value('test@example.com').for :email }
   it { should_not allow_value('test').for :email }
   it { should_not allow_value('@example').for :email }
+
+  include ActiveSupport::Testing::TimeHelpers
+
+  describe '.generate_token' do
+    let(:user) { build_stubbed(:user) }
+    let(:key) { Rails.application.secrets.secret_key_base }
+
+    it 'returns a JWT with valid claims' do
+      token = user.generate_token
+
+      claims = JWT.decode(token, key).first
+      freeze_time
+
+      expect(claims['id']).to eq user.id
+      expect(claims['exp']).to eq 30.days.from_now.to_i
+    end
+  end
 end

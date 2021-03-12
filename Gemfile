@@ -27,9 +27,10 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 # interactor for business logic
 gem 'interactor-rails'
-
 # graphql
 gem 'graphql'
+# JWT
+gem 'jwt'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

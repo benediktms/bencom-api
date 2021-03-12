@@ -13,6 +13,7 @@ module Users
         if user.authenticate(password)
           context.message = 'Successfully logged in'
           context.user = user
+          context.token = user.generate_token
         else
           context.fail! message: 'That seems like a wrong password'
         end

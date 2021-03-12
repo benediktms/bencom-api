@@ -10,6 +10,7 @@ module Users
       if user.persisted?
         context.user = user
         context.message = 'You have successfully signed up'
+        context.token = user.generate_token
       else
         context.fail! errors: user.errors.full_messages, user: nil
       end
