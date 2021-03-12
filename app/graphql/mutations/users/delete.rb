@@ -11,6 +11,8 @@ module Mutations
       def resolve(user_id:)
         user = ::Users::Get.call(id: user_id).user
 
+        authorize! user, to: :destroy? if user
+
         result = ::Users::Delete.call(user: user)
 
         {

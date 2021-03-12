@@ -10,7 +10,7 @@ module Mutations
       let(:user) { create(:user) }
 
       describe '.resolve' do
-        context 'valid credentials' do
+        context 'with valid credentials' do
           let(:variables) { { email: user.email, password: user.password } }
 
           it 'succeeds' do

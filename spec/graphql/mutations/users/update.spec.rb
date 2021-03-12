@@ -9,9 +9,10 @@ module Mutations
       end
 
       let(:user) { create(:user) }
+      let(:unauthorized_user) { create(:user) }
 
       describe '.resolve' do
-        context 'valid params' do
+        context 'with valid params' do
           let(:variables) { { userId: user.id, email: 'arianna@email.com' } }
 
           it 'updates the user' do
@@ -36,6 +37,22 @@ module Mutations
 
             expect(data['errors']).to eq ['Email is invalid']
             expect(data['user']).to be_nil
+          end
+        end
+
+        context 'unauthorized' do
+          let(:variables) { { userId: unauthorized_user.id, email: 'arianna@email.com' } }
+
+          it 'returns error message' do
+            execute
+
+            json = JSON.parse(response.body)
+
+            data = json.dig('data', 'updateUser')
+            error_message = json.dig('errors').first['message']
+
+            expect(data).to be_nil
+            expect(error_message).to eq 'You are not authorized to perform this action'
           end
         end
       end

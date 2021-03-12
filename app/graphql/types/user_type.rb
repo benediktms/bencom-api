@@ -8,5 +8,13 @@ module Types
     field :email, String, null: true
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
+
+    def self.authorized?(object, context)
+      super && allowed_to?(
+        :show?,
+        object,
+        context: { user: context[:current_user] }
+      )
+    end
   end
 end

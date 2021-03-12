@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BencomApiSchema < GraphQL::Schema
   mutation(Types::MutationType)
   query(Types::QueryType)
@@ -27,5 +29,24 @@ class BencomApiSchema < GraphQL::Schema
     # Then, based on `type_name` and `id`
     # find an object in your application
     # ...
+  end
+
+  def self.unauthorized_object(_error)
+    raise GraphQL::ExecutionError, 'You are not authorized to perform this action'
+  end
+
+  # use GraphQL::Execution::Errors -> installed by default
+
+  rescue_from(ActionPolicy::Unauthorized) do |err|
+    raise GraphQL::ExecutionError.new(
+      # use result.message (backed by i18n) as an error message
+      err.result.message,
+      # use GraphQL error extensions to provide more context
+      extensions: {
+        code: :unauthorized,
+        fullMessages: err.result.reasons.full_messages,
+        details: err.result.reasons.details
+      }
+    )
   end
 end

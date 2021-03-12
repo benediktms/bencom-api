@@ -9,7 +9,7 @@ module Users
     let(:user) { create(:user) }
 
     describe '.call' do
-      context 'success' do
+      context 'when successful' do
         let(:credentials) do
           { email: user.email, password: user.password }
         end
@@ -31,7 +31,7 @@ module Users
         end
       end
 
-      context 'wrong password' do
+      context 'with wrong password' do
         let(:credentials) do
           { email: user.email, password: 'wrong password' }
         end
@@ -45,7 +45,7 @@ module Users
         end
       end
 
-      context 'user not found' do
+      context 'when the user is not found' do
         let(:credentials) do
           { email: 'one@two.com', password: user.password }
         end

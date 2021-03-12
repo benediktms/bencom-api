@@ -9,9 +9,10 @@ module Queries
 
       let(:user) { create(:user) }
       let(:context) { { current_user: user } }
+      let(:unauthorized_user) { create(:user) }
 
       describe '.resolve' do
-        context 'authorized' do
+        context 'when authorized' do
           let(:variables) { { id: user.id } }
 
           it 'returns the user' do
@@ -20,6 +21,18 @@ module Queries
             expect(data).to include(
               'email' => user.email, 'firstName' => user.first_name
             )
+          end
+        end
+
+        context 'when unauthorized' do
+          let(:variables) { { id: unauthorized_user.id } }
+
+          it 'fails' do
+            data = execute.dig('data', 'showUser')
+            error_message = execute['errors'].first['message']
+
+            expect(data).to be_nil
+            expect(error_message).to eq('You are not authorized to perform this action')
           end
         end
       end

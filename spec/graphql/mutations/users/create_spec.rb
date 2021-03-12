@@ -9,7 +9,7 @@ module Mutations
       end
 
       describe '.resolve' do
-        context 'valid params' do
+        context 'with valid params' do
           it 'creates a new user' do
             expect do
               post '/graphql', params: { query: query_string, variables: variables }
@@ -29,18 +29,9 @@ module Mutations
             expect(data['message']).not_to be_nil
             expect(data['token']).not_to be_nil
           end
-
-          # it 'returns the user token, and success message' do
-          #   execute = post '/graphql', params: { query: query_string, variables: variables }
-
-          #   parsed_json = JSON.parse(response.body)
-          #   data = parsed_json['data']['createUser']
-
-          #   expect(data['token']).not_to be_nil
-          # end
         end
 
-        context 'invalid params' do
+        context 'with invalid params' do
           it 'fails' do
             execute = post '/graphql', params: { query: query_string, variables: invalid_variables }
 
