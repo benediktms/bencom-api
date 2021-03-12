@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 module Mutations
   module Users
     RSpec.describe Create, type: :request do
@@ -31,15 +29,6 @@ module Mutations
             expect(data['message']).not_to be_nil
             expect(data['token']).not_to be_nil
           end
-
-          # it 'returns the user token, and success message' do
-          #   execute = post '/graphql', params: { query: query_string, variables: variables }
-
-          #   parsed_json = JSON.parse(response.body)
-          #   data = parsed_json['data']['createUser']
-
-          #   expect(data['token']).not_to be_nil
-          # end
         end
 
         context 'invalid params' do

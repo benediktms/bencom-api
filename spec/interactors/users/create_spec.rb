@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 module Users
   RSpec.describe Create, type: :interactor do
     subject(:sign_up) { described_class.call(attributes: attributes) }

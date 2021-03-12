@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 module Users
   RSpec.describe Delete, type: :interactor do
     subject(:context) { described_class.call(user: user) }

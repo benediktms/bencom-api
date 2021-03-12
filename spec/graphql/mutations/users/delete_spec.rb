@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 module Mutations
   module Users
     RSpec.describe Delete, type: :request do
